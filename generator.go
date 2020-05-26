@@ -1,0 +1,2 @@
+//go:generate poor-generic g -package present -outFile generated_generics.go -templateFile template_for_generics.txt -namesToPrimitiveTypes "Bool=bool,Int=int,Int64=int64,Int32=int32,Int16=int16,Int8=int8,Uint=uint,Uint64=uint64,Uint32=uint32,Uint16=uint16,Uint8=uint8,Byte=byte,Rune=rune,String=string,Float64=float64,Float32=float32,Uintptr=uintptr,Complex128=complex128,Complex64=complex64"
+package present

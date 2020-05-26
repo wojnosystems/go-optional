@@ -1,0 +1,44 @@
+type {{.Name}} struct {
+	state base
+	value {{.PrimitiveKeyword}}
+}
+
+func New{{.Name}}() {{.Name}} {
+	return {{.Name}} {
+		state: newBase(),
+	}
+}
+
+func New{{.Name}}Set(value {{.PrimitiveKeyword}}) {{.Name}} {
+	return {{.Name}} {
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b {{.Name}}) Value() {{.PrimitiveKeyword}} {
+	return b.value
+}
+
+func (b {{.Name}}) IsPresent() bool {
+	return b.state.IsPresent()
+}
+
+func (b {{.Name}}) ValueWithOK() (value {{.PrimitiveKeyword}}, ok bool) {
+	return b.Value(), b.state.IsPresent()
+}
+
+func (b *{{.Name}}) Set(value {{.PrimitiveKeyword}}) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *{{.Name}}) Unset() {
+	b.state.Unset()
+}
+
+func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
+    left, leftOk := b.ValueWithOK()
+    right, rightOk := compareWith.ValueWithOK()
+    return leftOk == rightOk && left == right
+}
