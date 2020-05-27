@@ -24,7 +24,7 @@ func (b {{.Name}}) IsPresent() bool {
 	return b.state.IsPresent()
 }
 
-func (b {{.Name}}) ValueWithOK() (value {{.PrimitiveKeyword}}, ok bool) {
+func (b {{.Name}}) ValueWithPresent() (value {{.PrimitiveKeyword}}, ok bool) {
 	return b.Value(), b.state.IsPresent()
 }
 
@@ -38,7 +38,7 @@ func (b *{{.Name}}) Unset() {
 }
 
 func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
-    left, leftOk := b.ValueWithOK()
-    right, rightOk := compareWith.ValueWithOK()
+    left, leftOk := b.ValueWithPresent()
+    right, rightOk := compareWith.ValueWithPresent()
     return leftOk == rightOk && left == right
 }

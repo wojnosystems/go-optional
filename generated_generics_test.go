@@ -68,8 +68,8 @@ func TestInt_ValueWithOK(t *testing.T) {
 
 	for caseName, c := range cases {
 		c.prep(&c.value)
-		actual, ok := c.value.ValueWithOK()
-		assert.Equal(t, c.expectPresent, ok, caseName)
+		actual, present := c.value.ValueWithPresent()
+		assert.Equal(t, c.expectPresent, present, caseName)
 		if c.expectPresent {
 			assert.Equal(t, c.expectValue, actual, caseName)
 		}
