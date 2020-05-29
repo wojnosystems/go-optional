@@ -2,7 +2,7 @@ package optional
 
 type Presenter interface {
 	Unsetter
-	IsPresent() bool
+	IsSet() bool
 }
 
 type Unsetter interface {

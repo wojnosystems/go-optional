@@ -1,29 +1,29 @@
 package optional
 
 type base struct {
-	isPresent bool
+	isSet bool
 }
 
 func newBase() base {
 	return base{
-		isPresent: false,
+		isSet: false,
 	}
 }
 
 func newBaseSet() base {
 	return base{
-		isPresent: true,
+		isSet: true,
 	}
 }
 
-func (b base) IsPresent() bool {
-	return b.isPresent
+func (b base) IsSet() bool {
+	return b.isSet
 }
 
 func (b *base) Unset() {
-	b.isPresent = false
+	b.isSet = false
 }
 
 func (b *base) Set() {
-	b.isPresent = true
+	b.isSet = true
 }

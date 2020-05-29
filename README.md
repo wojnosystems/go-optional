@@ -18,7 +18,7 @@ func main() {
 }
 ```
 
-This will emit "values are the same!". However, if you use the go-present library:
+This will emit "values are the same!". However, if you use the go-optional library:
 
 ```go
 package main
@@ -26,11 +26,11 @@ package main
 import (
 
 "fmt"
-"github.com/wojnosystems/go-present"
+"github.com/wojnosystems/go-optional"
 )
 
 func main() {
-    blankableString := present.NewString()
+    blankableString := optional.NewString()
     blankableString.Set("") // no longer blank
     if value, ok := blankableString.ValueWithOK(); ok {
         fmt.Printf("value set! but is \"%s\"!\n", value)

@@ -9,7 +9,7 @@ func New{{.Name}}() {{.Name}} {
 	}
 }
 
-func New{{.Name}}Set(value {{.PrimitiveKeyword}}) {{.Name}} {
+func New{{.Name}}From(value {{.PrimitiveKeyword}}) {{.Name}} {
 	return {{.Name}} {
 		state: newBaseSet(),
 		value: value,
@@ -20,12 +20,8 @@ func (b {{.Name}}) Value() {{.PrimitiveKeyword}} {
 	return b.value
 }
 
-func (b {{.Name}}) IsPresent() bool {
-	return b.state.IsPresent()
-}
-
-func (b {{.Name}}) ValueWithPresent() (value {{.PrimitiveKeyword}}, ok bool) {
-	return b.Value(), b.state.IsPresent()
+func (b {{.Name}}) IsSet() bool {
+	return b.state.IsSet()
 }
 
 func (b *{{.Name}}) Set(value {{.PrimitiveKeyword}}) {
@@ -38,7 +34,9 @@ func (b *{{.Name}}) Unset() {
 }
 
 func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
-    left, leftOk := b.ValueWithPresent()
-    right, rightOk := compareWith.ValueWithPresent()
+    left := b.Value()
+    leftOk := b.IsSet()
+    right := compareWith.Value()
+    rightOk := compareWith.IsSet()
     return leftOk == rightOk && left == right
 }

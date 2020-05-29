@@ -33,7 +33,7 @@ func TestInt_IsPresent(t *testing.T) {
 
 	for caseName, c := range cases {
 		c.prep(&c.value)
-		assert.Equal(t, c.expectPresent, c.value.IsPresent(), caseName)
+		assert.Equal(t, c.expectPresent, c.value.IsSet(), caseName)
 		if c.expectPresent {
 			assert.Equal(t, c.expectValue, c.value.Value(), caseName)
 		}
@@ -68,7 +68,8 @@ func TestInt_ValueWithOK(t *testing.T) {
 
 	for caseName, c := range cases {
 		c.prep(&c.value)
-		actual, present := c.value.ValueWithPresent()
+		actual := c.value.Value()
+		present := c.value.IsSet()
 		assert.Equal(t, c.expectPresent, present, caseName)
 		if c.expectPresent {
 			assert.Equal(t, c.expectValue, actual, caseName)
