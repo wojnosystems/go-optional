@@ -78,3 +78,62 @@ func TestInt_ValueWithOK(t *testing.T) {
 }
 
 func noOp(*Int) {}
+
+func TestInt_IsEqual(t *testing.T) {
+	cases := map[string]struct {
+		source      Int
+		compareWith Optionaler
+		expected    bool
+	}{
+		"nil": {
+			source:   NewIntFrom(5),
+			expected: false,
+		},
+		"equal": {
+			source:      NewIntFrom(5),
+			compareWith: intAddress(NewIntFrom(5)),
+			expected:    true,
+		},
+		"not equal": {
+			source:      NewIntFrom(5),
+			compareWith: intAddress(NewIntFrom(6)),
+			expected:    false,
+		},
+		"not equal unset left": {
+			source:      NewInt(),
+			compareWith: intAddress(NewIntFrom(6)),
+			expected:    false,
+		},
+		"not equal unset right": {
+			source:      NewIntFrom(5),
+			compareWith: unset(intAddress(NewIntFrom(6))),
+			expected:    false,
+		},
+		"equal both unset": {
+			source:      NewInt(),
+			compareWith: unset(intAddress(NewIntFrom(6))),
+			expected:    true,
+		},
+		"different type": {
+			source:      NewIntFrom(5),
+			compareWith: stringAddress(NewStringFrom("x")),
+			expected:    false,
+		},
+	}
+
+	for caseName, c := range cases {
+		actual := c.source.IsEqual(c.compareWith)
+		assert.Equal(t, c.expected, actual, caseName)
+	}
+}
+
+func intAddress(i Int) *Int {
+	return &i
+}
+func stringAddress(i String) *String {
+	return &i
+}
+func unset(i Optionaler) Optionaler {
+	i.Unset()
+	return i
+}

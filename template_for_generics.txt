@@ -33,10 +33,24 @@ func (b *{{.Name}}) Unset() {
 	b.state.Unset()
 }
 
-func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
-    left := b.Value()
-    leftOk := b.IsSet()
-    right := compareWith.Value()
-    rightOk := compareWith.IsSet()
-    return leftOk == rightOk && left == right
+func (b {{.Name}}) IsEqual( compareWith Optionaler ) bool {
+    if compareWith == nil {
+        return false
+    }
+    if casted, ok := compareWith.(*{{.Name}}); !ok {
+        return false
+    } else {
+        leftOk := b.IsSet()
+        rightOk := casted.IsSet()
+        if leftOk != rightOk {
+			return false
+		}
+		// both are unset
+		if !leftOk {
+			return true
+		}
+        left := b.Value()
+        right := casted.Value()
+		return left == right
+    }
 }

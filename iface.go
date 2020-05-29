@@ -1,14 +1,10 @@
 package optional
 
-type Presenter interface {
+type Optionaler interface {
 	Unsetter
 	IsSet() bool
 }
 
 type Unsetter interface {
 	Unset()
-}
-
-type Setter interface {
-	Set()
 }
