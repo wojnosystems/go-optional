@@ -1,4 +1,4 @@
-package present
+package optional
 
 type base struct {
 	isPresent bool

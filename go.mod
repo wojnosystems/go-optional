@@ -1,4 +1,4 @@
-module github.com/wojnosystems/go-present
+module github.com/wojnosystems/go-optional
 
 go 1.14
 
