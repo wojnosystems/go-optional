@@ -1,15 +1,17 @@
+// {{.Name}} start
+
 type {{.Name}} struct {
 	state base
 	value {{.PrimitiveKeyword}}
 }
 
-func New{{.Name}}() {{.Name}} {
+func {{.Name}}Unset() {{.Name}} {
 	return {{.Name}} {
 		state: newBase(),
 	}
 }
 
-func New{{.Name}}From(value {{.PrimitiveKeyword}}) {{.Name}} {
+func {{.Name}}From(value {{.PrimitiveKeyword}}) {{.Name}} {
 	return {{.Name}} {
 		state: newBaseSet(),
 		value: value,
@@ -33,24 +35,19 @@ func (b *{{.Name}}) Unset() {
 	b.state.Unset()
 }
 
-func (b {{.Name}}) IsEqual( compareWith Optionaler ) bool {
-    if compareWith == nil {
+func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
+    leftSet := b.IsSet()
+    // one is set, the other is not set, not equal
+    if leftSet != compareWith.IsSet() {
         return false
     }
-    if casted, ok := compareWith.(*{{.Name}}); !ok {
-        return false
-    } else {
-        leftOk := b.IsSet()
-        rightOk := casted.IsSet()
-        if leftOk != rightOk {
-			return false
-		}
-		// both are unset
-		if !leftOk {
-			return true
-		}
-        left := b.Value()
-        right := casted.Value()
-		return left == right
+    // both are unset
+    if !leftSet {
+        return true
     }
+    // both are set, compare the actual values
+    return b.Value() == compareWith.Value()
 }
+
+// {{.Name}} end
+

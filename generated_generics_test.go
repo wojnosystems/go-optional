@@ -32,11 +32,13 @@ func TestInt_IsPresent(t *testing.T) {
 	}
 
 	for caseName, c := range cases {
-		c.prep(&c.value)
-		assert.Equal(t, c.expectPresent, c.value.IsSet(), caseName)
-		if c.expectPresent {
-			assert.Equal(t, c.expectValue, c.value.Value(), caseName)
-		}
+		t.Run(caseName, func(t *testing.T) {
+			c.prep(&c.value)
+			assert.Equal(t, c.expectPresent, c.value.IsSet())
+			if c.expectPresent {
+				assert.Equal(t, c.expectValue, c.value.Value())
+			}
+		})
 	}
 }
 
@@ -67,13 +69,15 @@ func TestInt_ValueWithOK(t *testing.T) {
 	}
 
 	for caseName, c := range cases {
-		c.prep(&c.value)
-		actual := c.value.Value()
-		present := c.value.IsSet()
-		assert.Equal(t, c.expectPresent, present, caseName)
-		if c.expectPresent {
-			assert.Equal(t, c.expectValue, actual, caseName)
-		}
+		t.Run(caseName, func(t *testing.T) {
+			c.prep(&c.value)
+			actual := c.value.Value()
+			present := c.value.IsSet()
+			assert.Equal(t, c.expectPresent, present)
+			if c.expectPresent {
+				assert.Equal(t, c.expectValue, actual)
+			}
+		})
 	}
 }
 
@@ -82,58 +86,49 @@ func noOp(*Int) {}
 func TestInt_IsEqual(t *testing.T) {
 	cases := map[string]struct {
 		source      Int
-		compareWith Optionaler
+		compareWith Int
 		expected    bool
 	}{
 		"nil": {
-			source:   NewIntFrom(5),
+			source:   IntFrom(5),
 			expected: false,
 		},
 		"equal": {
-			source:      NewIntFrom(5),
-			compareWith: intAddress(NewIntFrom(5)),
+			source:      IntFrom(5),
+			compareWith: IntFrom(5),
 			expected:    true,
 		},
 		"not equal": {
-			source:      NewIntFrom(5),
-			compareWith: intAddress(NewIntFrom(6)),
+			source:      IntFrom(5),
+			compareWith: IntFrom(6),
 			expected:    false,
 		},
 		"not equal unset left": {
-			source:      NewInt(),
-			compareWith: intAddress(NewIntFrom(6)),
+			source:      IntUnset(),
+			compareWith: IntFrom(6),
 			expected:    false,
 		},
 		"not equal unset right": {
-			source:      NewIntFrom(5),
-			compareWith: unset(intAddress(NewIntFrom(6))),
+			source:      IntFrom(5),
+			compareWith: unset(IntFrom(6)),
 			expected:    false,
 		},
 		"equal both unset": {
-			source:      NewInt(),
-			compareWith: unset(intAddress(NewIntFrom(6))),
+			source:      IntUnset(),
+			compareWith: unset(IntFrom(6)),
 			expected:    true,
-		},
-		"different type": {
-			source:      NewIntFrom(5),
-			compareWith: stringAddress(NewStringFrom("x")),
-			expected:    false,
 		},
 	}
 
 	for caseName, c := range cases {
-		actual := c.source.IsEqual(c.compareWith)
-		assert.Equal(t, c.expected, actual, caseName)
+		t.Run(caseName, func(t *testing.T) {
+			actual := c.source.IsEqual(c.compareWith)
+			assert.Equal(t, c.expected, actual)
+		})
 	}
 }
 
-func intAddress(i Int) *Int {
-	return &i
-}
-func stringAddress(i String) *String {
-	return &i
-}
-func unset(i Optionaler) Optionaler {
+func unset(i Int) Int {
 	i.Unset()
 	return i
 }
