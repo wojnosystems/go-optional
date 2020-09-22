@@ -1,10 +1,14 @@
 package optional
 
-type Optionaler interface {
-	Unsetter
+type Tester interface {
 	IsSet() bool
 }
 
 type Unsetter interface {
 	Unset()
+}
+
+type TestUnsetter interface {
+	Tester
+	Unsetter
 }
