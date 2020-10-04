@@ -1,43 +1,43 @@
 package optional
 
-// Complex64 start
+// Int32 start
 
-type Complex64 struct {
+type Int32 struct {
 	state base
-	value complex64
+	value int32
 }
 
-func Complex64Unset() Complex64 {
-	return Complex64{
+func Int32Unset() Int32 {
+	return Int32{
 		state: newBase(),
 	}
 }
 
-func Complex64From(value complex64) Complex64 {
-	return Complex64{
+func Int32From(value int32) Int32 {
+	return Int32{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Complex64) Value() complex64 {
+func (b Int32) Value() int32 {
 	return b.value
 }
 
-func (b Complex64) IsSet() bool {
+func (b Int32) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Complex64) Set(value complex64) {
+func (b *Int32) Set(value int32) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Complex64) Unset() {
+func (b *Int32) Unset() {
 	b.state.Unset()
 }
 
-func (b Complex64) IsEqual(compareWith Complex64) bool {
+func (b Int32) IsEqual(compareWith Int32) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -51,46 +51,46 @@ func (b Complex64) IsEqual(compareWith Complex64) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Complex64 end
+// Int32 end
 
-// Int start
+// Uint64 start
 
-type Int struct {
+type Uint64 struct {
 	state base
-	value int
+	value uint64
 }
 
-func IntUnset() Int {
-	return Int{
+func Uint64Unset() Uint64 {
+	return Uint64{
 		state: newBase(),
 	}
 }
 
-func IntFrom(value int) Int {
-	return Int{
+func Uint64From(value uint64) Uint64 {
+	return Uint64{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Int) Value() int {
+func (b Uint64) Value() uint64 {
 	return b.value
 }
 
-func (b Int) IsSet() bool {
+func (b Uint64) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Int) Set(value int) {
+func (b *Uint64) Set(value uint64) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Int) Unset() {
+func (b *Uint64) Unset() {
 	b.state.Unset()
 }
 
-func (b Int) IsEqual(compareWith Int) bool {
+func (b Uint64) IsEqual(compareWith Uint64) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -104,7 +104,113 @@ func (b Int) IsEqual(compareWith Int) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Int end
+// Uint64 end
+
+// String start
+
+type String struct {
+	state base
+	value string
+}
+
+func StringUnset() String {
+	return String{
+		state: newBase(),
+	}
+}
+
+func StringFrom(value string) String {
+	return String{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b String) Value() string {
+	return b.value
+}
+
+func (b String) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *String) Set(value string) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *String) Unset() {
+	b.state.Unset()
+}
+
+func (b String) IsEqual(compareWith String) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// String end
+
+// Float64 start
+
+type Float64 struct {
+	state base
+	value float64
+}
+
+func Float64Unset() Float64 {
+	return Float64{
+		state: newBase(),
+	}
+}
+
+func Float64From(value float64) Float64 {
+	return Float64{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b Float64) Value() float64 {
+	return b.value
+}
+
+func (b Float64) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *Float64) Set(value float64) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *Float64) Unset() {
+	b.state.Unset()
+}
+
+func (b Float64) IsEqual(compareWith Float64) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// Float64 end
 
 // Int64 start
 
@@ -212,44 +318,44 @@ func (b Uint) IsEqual(compareWith Uint) bool {
 
 // Uint end
 
-// Uint64 start
+// Uint32 start
 
-type Uint64 struct {
+type Uint32 struct {
 	state base
-	value uint64
+	value uint32
 }
 
-func Uint64Unset() Uint64 {
-	return Uint64{
+func Uint32Unset() Uint32 {
+	return Uint32{
 		state: newBase(),
 	}
 }
 
-func Uint64From(value uint64) Uint64 {
-	return Uint64{
+func Uint32From(value uint32) Uint32 {
+	return Uint32{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Uint64) Value() uint64 {
+func (b Uint32) Value() uint32 {
 	return b.value
 }
 
-func (b Uint64) IsSet() bool {
+func (b Uint32) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Uint64) Set(value uint64) {
+func (b *Uint32) Set(value uint32) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Uint64) Unset() {
+func (b *Uint32) Unset() {
 	b.state.Unset()
 }
 
-func (b Uint64) IsEqual(compareWith Uint64) bool {
+func (b Uint32) IsEqual(compareWith Uint32) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -263,46 +369,46 @@ func (b Uint64) IsEqual(compareWith Uint64) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Uint64 end
+// Uint32 end
 
-// Uint16 start
+// Uintptr start
 
-type Uint16 struct {
+type Uintptr struct {
 	state base
-	value uint16
+	value uintptr
 }
 
-func Uint16Unset() Uint16 {
-	return Uint16{
+func UintptrUnset() Uintptr {
+	return Uintptr{
 		state: newBase(),
 	}
 }
 
-func Uint16From(value uint16) Uint16 {
-	return Uint16{
+func UintptrFrom(value uintptr) Uintptr {
+	return Uintptr{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Uint16) Value() uint16 {
+func (b Uintptr) Value() uintptr {
 	return b.value
 }
 
-func (b Uint16) IsSet() bool {
+func (b Uintptr) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Uint16) Set(value uint16) {
+func (b *Uintptr) Set(value uintptr) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Uint16) Unset() {
+func (b *Uintptr) Unset() {
 	b.state.Unset()
 }
 
-func (b Uint16) IsEqual(compareWith Uint16) bool {
+func (b Uintptr) IsEqual(compareWith Uintptr) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -316,7 +422,219 @@ func (b Uint16) IsEqual(compareWith Uint16) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Uint16 end
+// Uintptr end
+
+// Complex64 start
+
+type Complex64 struct {
+	state base
+	value complex64
+}
+
+func Complex64Unset() Complex64 {
+	return Complex64{
+		state: newBase(),
+	}
+}
+
+func Complex64From(value complex64) Complex64 {
+	return Complex64{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b Complex64) Value() complex64 {
+	return b.value
+}
+
+func (b Complex64) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *Complex64) Set(value complex64) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *Complex64) Unset() {
+	b.state.Unset()
+}
+
+func (b Complex64) IsEqual(compareWith Complex64) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// Complex64 end
+
+// Int start
+
+type Int struct {
+	state base
+	value int
+}
+
+func IntUnset() Int {
+	return Int{
+		state: newBase(),
+	}
+}
+
+func IntFrom(value int) Int {
+	return Int{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b Int) Value() int {
+	return b.value
+}
+
+func (b Int) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *Int) Set(value int) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *Int) Unset() {
+	b.state.Unset()
+}
+
+func (b Int) IsEqual(compareWith Int) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// Int end
+
+// Uint8 start
+
+type Uint8 struct {
+	state base
+	value uint8
+}
+
+func Uint8Unset() Uint8 {
+	return Uint8{
+		state: newBase(),
+	}
+}
+
+func Uint8From(value uint8) Uint8 {
+	return Uint8{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b Uint8) Value() uint8 {
+	return b.value
+}
+
+func (b Uint8) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *Uint8) Set(value uint8) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *Uint8) Unset() {
+	b.state.Unset()
+}
+
+func (b Uint8) IsEqual(compareWith Uint8) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// Uint8 end
+
+// Byte start
+
+type Byte struct {
+	state base
+	value byte
+}
+
+func ByteUnset() Byte {
+	return Byte{
+		state: newBase(),
+	}
+}
+
+func ByteFrom(value byte) Byte {
+	return Byte{
+		state: newBaseSet(),
+		value: value,
+	}
+}
+
+func (b Byte) Value() byte {
+	return b.value
+}
+
+func (b Byte) IsSet() bool {
+	return b.state.IsSet()
+}
+
+func (b *Byte) Set(value byte) {
+	b.state.Set()
+	b.value = value
+}
+
+func (b *Byte) Unset() {
+	b.state.Unset()
+}
+
+func (b Byte) IsEqual(compareWith Byte) bool {
+	leftSet := b.IsSet()
+	// one is set, the other is not set, not equal
+	if leftSet != compareWith.IsSet() {
+		return false
+	}
+	// both are unset
+	if !leftSet {
+		return true
+	}
+	// both are set, compare the actual values
+	return b.Value() == compareWith.Value()
+}
+
+// Byte end
 
 // Rune start
 
@@ -477,324 +795,6 @@ func (b Bool) IsEqual(compareWith Bool) bool {
 
 // Bool end
 
-// Int32 start
-
-type Int32 struct {
-	state base
-	value int32
-}
-
-func Int32Unset() Int32 {
-	return Int32{
-		state: newBase(),
-	}
-}
-
-func Int32From(value int32) Int32 {
-	return Int32{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b Int32) Value() int32 {
-	return b.value
-}
-
-func (b Int32) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *Int32) Set(value int32) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *Int32) Unset() {
-	b.state.Unset()
-}
-
-func (b Int32) IsEqual(compareWith Int32) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// Int32 end
-
-// Uint32 start
-
-type Uint32 struct {
-	state base
-	value uint32
-}
-
-func Uint32Unset() Uint32 {
-	return Uint32{
-		state: newBase(),
-	}
-}
-
-func Uint32From(value uint32) Uint32 {
-	return Uint32{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b Uint32) Value() uint32 {
-	return b.value
-}
-
-func (b Uint32) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *Uint32) Set(value uint32) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *Uint32) Unset() {
-	b.state.Unset()
-}
-
-func (b Uint32) IsEqual(compareWith Uint32) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// Uint32 end
-
-// Byte start
-
-type Byte struct {
-	state base
-	value byte
-}
-
-func ByteUnset() Byte {
-	return Byte{
-		state: newBase(),
-	}
-}
-
-func ByteFrom(value byte) Byte {
-	return Byte{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b Byte) Value() byte {
-	return b.value
-}
-
-func (b Byte) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *Byte) Set(value byte) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *Byte) Unset() {
-	b.state.Unset()
-}
-
-func (b Byte) IsEqual(compareWith Byte) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// Byte end
-
-// String start
-
-type String struct {
-	state base
-	value string
-}
-
-func StringUnset() String {
-	return String{
-		state: newBase(),
-	}
-}
-
-func StringFrom(value string) String {
-	return String{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b String) Value() string {
-	return b.value
-}
-
-func (b String) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *String) Set(value string) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *String) Unset() {
-	b.state.Unset()
-}
-
-func (b String) IsEqual(compareWith String) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// String end
-
-// Float64 start
-
-type Float64 struct {
-	state base
-	value float64
-}
-
-func Float64Unset() Float64 {
-	return Float64{
-		state: newBase(),
-	}
-}
-
-func Float64From(value float64) Float64 {
-	return Float64{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b Float64) Value() float64 {
-	return b.value
-}
-
-func (b Float64) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *Float64) Set(value float64) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *Float64) Unset() {
-	b.state.Unset()
-}
-
-func (b Float64) IsEqual(compareWith Float64) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// Float64 end
-
-// Complex128 start
-
-type Complex128 struct {
-	state base
-	value complex128
-}
-
-func Complex128Unset() Complex128 {
-	return Complex128{
-		state: newBase(),
-	}
-}
-
-func Complex128From(value complex128) Complex128 {
-	return Complex128{
-		state: newBaseSet(),
-		value: value,
-	}
-}
-
-func (b Complex128) Value() complex128 {
-	return b.value
-}
-
-func (b Complex128) IsSet() bool {
-	return b.state.IsSet()
-}
-
-func (b *Complex128) Set(value complex128) {
-	b.state.Set()
-	b.value = value
-}
-
-func (b *Complex128) Unset() {
-	b.state.Unset()
-}
-
-func (b Complex128) IsEqual(compareWith Complex128) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
-}
-
-// Complex128 end
-
 // Int16 start
 
 type Int16 struct {
@@ -901,44 +901,44 @@ func (b Int8) IsEqual(compareWith Int8) bool {
 
 // Int8 end
 
-// Uint8 start
+// Uint16 start
 
-type Uint8 struct {
+type Uint16 struct {
 	state base
-	value uint8
+	value uint16
 }
 
-func Uint8Unset() Uint8 {
-	return Uint8{
+func Uint16Unset() Uint16 {
+	return Uint16{
 		state: newBase(),
 	}
 }
 
-func Uint8From(value uint8) Uint8 {
-	return Uint8{
+func Uint16From(value uint16) Uint16 {
+	return Uint16{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Uint8) Value() uint8 {
+func (b Uint16) Value() uint16 {
 	return b.value
 }
 
-func (b Uint8) IsSet() bool {
+func (b Uint16) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Uint8) Set(value uint8) {
+func (b *Uint16) Set(value uint16) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Uint8) Unset() {
+func (b *Uint16) Unset() {
 	b.state.Unset()
 }
 
-func (b Uint8) IsEqual(compareWith Uint8) bool {
+func (b Uint16) IsEqual(compareWith Uint16) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -952,46 +952,46 @@ func (b Uint8) IsEqual(compareWith Uint8) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Uint8 end
+// Uint16 end
 
-// Uintptr start
+// Complex128 start
 
-type Uintptr struct {
+type Complex128 struct {
 	state base
-	value uintptr
+	value complex128
 }
 
-func UintptrUnset() Uintptr {
-	return Uintptr{
+func Complex128Unset() Complex128 {
+	return Complex128{
 		state: newBase(),
 	}
 }
 
-func UintptrFrom(value uintptr) Uintptr {
-	return Uintptr{
+func Complex128From(value complex128) Complex128 {
+	return Complex128{
 		state: newBaseSet(),
 		value: value,
 	}
 }
 
-func (b Uintptr) Value() uintptr {
+func (b Complex128) Value() complex128 {
 	return b.value
 }
 
-func (b Uintptr) IsSet() bool {
+func (b Complex128) IsSet() bool {
 	return b.state.IsSet()
 }
 
-func (b *Uintptr) Set(value uintptr) {
+func (b *Complex128) Set(value complex128) {
 	b.state.Set()
 	b.value = value
 }
 
-func (b *Uintptr) Unset() {
+func (b *Complex128) Unset() {
 	b.state.Unset()
 }
 
-func (b Uintptr) IsEqual(compareWith Uintptr) bool {
+func (b Complex128) IsEqual(compareWith Complex128) bool {
 	leftSet := b.IsSet()
 	// one is set, the other is not set, not equal
 	if leftSet != compareWith.IsSet() {
@@ -1005,4 +1005,4 @@ func (b Uintptr) IsEqual(compareWith Uintptr) bool {
 	return b.Value() == compareWith.Value()
 }
 
-// Uintptr end
+// Complex128 end
