@@ -1,16 +1,24 @@
 // {{.Name}} start
 
+type {{.Name}}Tester interface{
+    Tester
+    IfSet( callback func( value {{.PrimitiveKeyword}} ) )
+}
+
+// {{.Name}} Creates an optional with value type: {{.PrimitiveKeyword}}
 type {{.Name}} struct {
 	state base
 	value {{.PrimitiveKeyword}}
 }
 
+// {{.Name}}Unset: creates a new optional which is unset when created. Calling IsSet will return false
 func {{.Name}}Unset() {{.Name}} {
 	return {{.Name}} {
 		state: newBase(),
 	}
 }
 
+// {{.Name}}From: creates a new Optional, but loaded with a value. Calling IsSet will return true
 func {{.Name}}From(value {{.PrimitiveKeyword}}) {{.Name}} {
 	return {{.Name}} {
 		state: newBaseSet(),
@@ -18,23 +26,31 @@ func {{.Name}}From(value {{.PrimitiveKeyword}}) {{.Name}} {
 	}
 }
 
+// Value: Gets the value of the optional item
+// @deprecated. Do not use this method. Will be removed in version 2. Use IfSet instead.
 func (b {{.Name}}) Value() {{.PrimitiveKeyword}} {
 	return b.value
 }
 
+// IsSet: returns true if there is a valid value or false if a value was not set or Unset
 func (b {{.Name}}) IsSet() bool {
 	return b.state.IsSet()
 }
 
+// Set: updates the value stored within this object and marks the value as valid. Calling IsSet after calling Set will return true.
 func (b *{{.Name}}) Set(value {{.PrimitiveKeyword}}) {
 	b.state.Set()
 	b.value = value
 }
 
+// Unset: marks the Optional as no longer having a valid value. Calling IsSet after Unset returns false.
 func (b *{{.Name}}) Unset() {
 	b.state.Unset()
 }
 
+// IsEqual: Compares two Optionals for not only the correct value, but also whether both are set or not
+// Note: this might be a conflation of concerns, but this is a useful tool for testing.
+// If both are not set, this returns true, regardless of the internal value. If both are set, then the values must be equal. If either is set but the other is unset, this returns false.
 func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
     leftSet := b.IsSet()
     // one is set, the other is not set, not equal
@@ -47,6 +63,23 @@ func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
     }
     // both are set, compare the actual values
     return b.Value() == compareWith.Value()
+}
+
+// IfSet: call-back method for code-flow safety. If IsSet is true, callback will be executed with
+// the value in the Optional. Otherwise, the callback will not be called.
+// This should eventually replace all instances of: Value and ValueWithOK.
+func (b {{.Name}}) IfSet( callback func( value {{.PrimitiveKeyword}} ) ) {
+    if b.IsSet() {
+        callback(b.value)
+    }
+}
+
+// IfSet: call-back method for code-flow safety. If IsSet is false, callback will be executed. No value is exposed as this item is not set. Otherwise, the callback will not be called.
+// This should eventually replace all instances of: if !o.IsSet()
+func (b {{.Name}}) IfUnset( callback func() ) {
+    if !b.IsSet() {
+        callback()
+    }
 }
 
 // {{.Name}} end
