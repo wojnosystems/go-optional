@@ -105,3 +105,40 @@ func TestIfUnset(t *testing.T) {
 		})
 	}
 }
+
+func TestIfSetElse(t *testing.T) {
+	cases := map[string]struct {
+		input             Int
+		expectSetCalled   bool
+		expectUnsetCalled bool
+	}{
+		"is set": {
+			input:             IntFrom(5),
+			expectSetCalled:   true,
+			expectUnsetCalled: false,
+		},
+		"not set": {
+			input:             IntUnset(),
+			expectSetCalled:   false,
+			expectUnsetCalled: true,
+		},
+	}
+
+	for caseName, c := range cases {
+		t.Run(caseName, func(t *testing.T) {
+			wasSetCalled := false
+			wasUnsetCalled := false
+			c.input.IfSetElse(func(value int) {
+				wasSetCalled = true
+			}, func() {
+				wasUnsetCalled = true
+			})
+			if c.expectSetCalled {
+				assert.True(t, wasSetCalled)
+			}
+			if c.expectUnsetCalled {
+				assert.True(t, wasUnsetCalled)
+			}
+		})
+	}
+}

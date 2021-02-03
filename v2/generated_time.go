@@ -7,6 +7,7 @@ import "time"
 type TimeTester interface {
 	Tester
 	IfSet(callback func(value time.Time))
+	IfSetElse(setCallback func(value time.Time), unsetCallback func())
 }
 
 // Time Creates an optional with value type: time.Time
@@ -63,6 +64,15 @@ func (b Time) IfUnset(callback func()) {
 	}
 }
 
+// IfSetElse: call-back method for code-flow safety. If IsSet is true, the first argument is called, if false, the second argument is called.
+func (b Time) IfSetElse(setCallback func(value time.Time), unsetCallback func()) {
+	if b.IsSet() {
+		setCallback(b.value)
+	} else {
+		unsetCallback()
+	}
+}
+
 // Time end
 
 // Duration start
@@ -70,6 +80,7 @@ func (b Time) IfUnset(callback func()) {
 type DurationTester interface {
 	Tester
 	IfSet(callback func(value time.Duration))
+	IfSetElse(setCallback func(value time.Duration), unsetCallback func())
 }
 
 // Duration Creates an optional with value type: time.Duration
@@ -123,6 +134,15 @@ func (b Duration) IfSet(callback func(value time.Duration)) {
 func (b Duration) IfUnset(callback func()) {
 	if !b.IsSet() {
 		callback()
+	}
+}
+
+// IfSetElse: call-back method for code-flow safety. If IsSet is true, the first argument is called, if false, the second argument is called.
+func (b Duration) IfSetElse(setCallback func(value time.Duration), unsetCallback func()) {
+	if b.IsSet() {
+		setCallback(b.value)
+	} else {
+		unsetCallback()
 	}
 }
 

@@ -3,6 +3,7 @@
 type {{.Name}}Tester interface{
     Tester
     IfSet( callback func( value {{.PrimitiveKeyword}} ) )
+    IfSetElse( setCallback func( value {{.PrimitiveKeyword}} ), unsetCallback func() )
 }
 
 // {{.Name}} Creates an optional with value type: {{.PrimitiveKeyword}}
@@ -56,6 +57,15 @@ func (b {{.Name}}) IfSet( callback func( value {{.PrimitiveKeyword}} ) ) {
 func (b {{.Name}}) IfUnset( callback func() ) {
     if !b.IsSet() {
         callback()
+    }
+}
+
+// IfSetElse: call-back method for code-flow safety. If IsSet is true, the first argument is called, if false, the second argument is called.
+func (b {{.Name}}) IfSetElse( setCallback func( value {{.PrimitiveKeyword}} ), unsetCallback func() ) {
+    if b.IsSet() {
+        setCallback(b.value)
+    } else {
+        unsetCallback()
     }
 }
 
