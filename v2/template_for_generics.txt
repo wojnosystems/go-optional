@@ -42,23 +42,6 @@ func (b *{{.Name}}) Unset() {
 	b.state.Unset()
 }
 
-// IsEqual: Compares two Optionals for not only the correct value, but also whether both are set or not
-// Note: this might be a conflation of concerns, but this is a useful tool for testing.
-// If both are not set, this returns true, regardless of the internal value. If both are set, then the values must be equal. If either is set but the other is unset, this returns false.
-func (b {{.Name}}) IsEqual( compareWith {{.Name}} ) bool {
-    leftSet := b.IsSet()
-    // one is set, the other is not set, not equal
-    if leftSet != compareWith.IsSet() {
-        return false
-    }
-    // both are unset
-    if !leftSet {
-        return true
-    }
-    // both are set, compare the actual values
-    return b.Value() == compareWith.Value()
-}
-
 // IfSet: call-back method for code-flow safety. If IsSet is true, callback will be executed with
 // the value in the Optional. Otherwise, the callback will not be called.
 // This should eventually replace all instances of: Value and ValueWithOK.

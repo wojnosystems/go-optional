@@ -30,12 +30,6 @@ func TimeFrom(value time.Time) Time {
 	}
 }
 
-// Value: Gets the value of the optional item
-// @deprecated. Do not use this method. Will be removed in version 2. Use IfSet instead.
-func (b Time) Value() time.Time {
-	return b.value
-}
-
 // IsSet: returns true if there is a valid value or false if a value was not set or Unset
 func (b Time) IsSet() bool {
 	return b.state.IsSet()
@@ -50,23 +44,6 @@ func (b *Time) Set(value time.Time) {
 // Unset: marks the Optional as no longer having a valid value. Calling IsSet after Unset returns false.
 func (b *Time) Unset() {
 	b.state.Unset()
-}
-
-// IsEqual: Compares two Optionals for not only the correct value, but also whether both are set or not
-// Note: this might be a conflation of concerns, but this is a useful tool for testing.
-// If both are not set, this returns true, regardless of the internal value. If both are set, then the values must be equal. If either is set but the other is unset, this returns false.
-func (b Time) IsEqual(compareWith Time) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
 }
 
 // IfSet: call-back method for code-flow safety. If IsSet is true, callback will be executed with
@@ -116,12 +93,6 @@ func DurationFrom(value time.Duration) Duration {
 	}
 }
 
-// Value: Gets the value of the optional item
-// @deprecated. Do not use this method. Will be removed in version 2. Use IfSet instead.
-func (b Duration) Value() time.Duration {
-	return b.value
-}
-
 // IsSet: returns true if there is a valid value or false if a value was not set or Unset
 func (b Duration) IsSet() bool {
 	return b.state.IsSet()
@@ -136,23 +107,6 @@ func (b *Duration) Set(value time.Duration) {
 // Unset: marks the Optional as no longer having a valid value. Calling IsSet after Unset returns false.
 func (b *Duration) Unset() {
 	b.state.Unset()
-}
-
-// IsEqual: Compares two Optionals for not only the correct value, but also whether both are set or not
-// Note: this might be a conflation of concerns, but this is a useful tool for testing.
-// If both are not set, this returns true, regardless of the internal value. If both are set, then the values must be equal. If either is set but the other is unset, this returns false.
-func (b Duration) IsEqual(compareWith Duration) bool {
-	leftSet := b.IsSet()
-	// one is set, the other is not set, not equal
-	if leftSet != compareWith.IsSet() {
-		return false
-	}
-	// both are unset
-	if !leftSet {
-		return true
-	}
-	// both are set, compare the actual values
-	return b.Value() == compareWith.Value()
 }
 
 // IfSet: call-back method for code-flow safety. If IsSet is true, callback will be executed with

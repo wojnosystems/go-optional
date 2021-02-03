@@ -1,6 +1,14 @@
 # Overview
 
-A library for using primitives when you need to know if the value is the default or if the value is just not set. For example, in Go, there's no way to tell the difference between:
+A library for using primitives when you need to know if the value is the default or if the value is just not set.
+
+# Installation
+
+`go get github.com/wojnosystems/go-optional/v2`
+
+# Native Go Example of default values (not good)
+
+For example, in Go, there's no way to tell the difference between:
 
 ```go
 package main
@@ -18,14 +26,18 @@ func main() {
 }
 ```
 
-This will emit "values are the same!". But just because a string is blank, doesn't mean it's not an intentional value. You can make all of the major Go-primitive values explicitly set with Go-Optional:
+This will emit "values are the same!". But just because a string is blank, doesn't mean it's not an intentional value.
+
+# Example with go-optional!
+
+You can make all of the major Go-primitive values explicitly set with Go-Optional:
 
 ```go
 package main
 
 import (
   "fmt"
-  "github.com/wojnosystems/go-optional"
+  "github.com/wojnosystems/go-optional/v2"
 )
 
 func main() {
@@ -100,13 +112,13 @@ The following interfaces are satisfied by all provided primitives, but is depend
 
 # Why the IntTester/StringTester specific interfaces?
 
-Ideally, the compiler should catch developer mistakes and prevent the developer from making them. V1 of this module fails at that due to exposing Value(). So this situation should be prevented by the compiler:
+Ideally, the compiler should catch developer mistakes and prevent the developer from making them. So this situation should be prevented by the compiler:
 
 ```go
 package main
 
 import (
-  "github.com/wojnosystems/go-optional"
+  "github.com/wojnosystems/go-optional/v2"
 )
 
 func main() {
@@ -125,7 +137,7 @@ The compiler can prevent it by only allowing you to access the variable within a
 package main
 
 import (
-  "github.com/wojnosystems/go-optional"
+  "github.com/wojnosystems/go-optional/v2"
 )
 
 func main() {

@@ -1,3 +1,7 @@
+# Deprecated, use Version 2:
+
+Use [v2](v2)
+
 # Overview
 
 A library for using primitives when you need to know if the value is the default or if the value is just not set. For example, in Go, there's no way to tell the difference between:
